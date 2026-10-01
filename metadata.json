@@ -1,0 +1,6 @@
+{
+  "name": "AnimeX",
+  "description": "AnimeX anime streaming application with browse, categories, watchlist, video player, and admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Anime": {
+      "collection": "anime",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "description": { "type": "string" },
+        "posterUrl": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "genres": { "type": "list" },
+        "year": { "type": "number" },
+        "status": { "type": "string" },
+        "rating": { "type": "number" },
+        "type": { "type": "string" },
+        "hasSub": { "type": "boolean" },
+        "hasDub": { "type": "boolean" },
+        "totalEpisodes": { "type": "number" },
+        "featured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "seasonsCount": { "type": "number" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Episode": {
+      "collection": "anime/{animeId}/episodes",
+      "fields": {
+        "id": { "type": "string" },
+        "animeId": { "type": "string" },
+        "episodeNumber": { "type": "number" },
+        "title": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "duration": { "type": "string" },
+        "season": { "type": "number" },
+        "published": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "WatchRecord": {
+      "collection": "users/{userId}/watchlist",
+      "fields": {
+        "animeId": { "type": "string" },
+        "title": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "posterUrl": { "type": "string" },
+        "currentEpisode": { "type": "number" },
+        "totalEpisodes": { "type": "number" },
+        "progressSeconds": { "type": "number" },
+        "durationSeconds": { "type": "number" },
+        "isMovie": { "type": "boolean" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Favorite": {
+      "collection": "users/{userId}/favorites",
+      "fields": {
+        "animeId": { "type": "string" },
+        "title": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "posterUrl": { "type": "string" },
+        "genres": { "type": "list" },
+        "rating": { "type": "number" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "Category": {
+      "collection": "categories",
+      "fields": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "iconName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "count": { "type": "number" }
+      }
+    },
+    "Admin": {
+      "collection": "admins",
+      "fields": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    }
+  }
+}
