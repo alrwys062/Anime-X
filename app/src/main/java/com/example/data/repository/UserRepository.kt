@@ -75,6 +75,11 @@ class UserRepository(private val context: Context) {
             _isAdminState.value = false
             return
         }
+        // Super Admin hard check
+        if (user.email.equals("zaim9002@gmail.com", ignoreCase = true)) {
+            _isAdminState.value = true
+            return
+        }
         // Check if user is registered in admins collection or user role
         CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
             try {
@@ -292,13 +297,20 @@ class UserRepository(private val context: Context) {
     }
 
     fun observeAdmins(): Flow<List<AdminUser>> = flow {
+        val defaultAdmins = listOf(
+            AdminUser("superadmin_zaim", "zaim9002@gmail.com", "المسؤول العام (Super Admin)", "superadmin"),
+            AdminUser("admin_default", "admin@animex.app", "مدير النظام", "admin")
+        )
         try {
             db.collection("admins").snapshots()
-                .map { snap -> snap.toObjects(AdminUser::class.java) }
-                .catch { emit(listOf(AdminUser("admin_default", "admin@animex.app", "مدير النظام", "superadmin"))) }
+                .map { snap -> 
+                    val list = snap.toObjects(AdminUser::class.java)
+                    if (list.isNotEmpty()) list else defaultAdmins
+                }
+                .catch { emit(defaultAdmins) }
                 .collect { emit(it) }
         } catch (e: Exception) {
-            emit(listOf(AdminUser("admin_default", "admin@animex.app", "مدير النظام", "superadmin")))
+            emit(defaultAdmins)
         }
     }
 
